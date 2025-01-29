@@ -79,7 +79,7 @@ const AddRating:React.FC<AddRatingProps> = ({product, user}) => {
 
             <Input
             id="comment"
-            label=""
+            label="Escreva aqui a sua opinião..."
             disabled = {isLoandig}
             register={register}
             errors={errors}
