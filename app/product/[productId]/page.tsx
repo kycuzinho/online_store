@@ -17,13 +17,20 @@ const Product = async({params}: {params: IPrams}) => {
     const user = await getCurrentUser();
 
     if(!product) return <NullData title="Este produto não existe"/>
+
+    const transformedUser = user ? {
+        ...user,
+        createdAt: new Date(user.createdAt), // Convert to Date
+        updatedAt: new Date(user.updatedAt), // Convert to Date
+        emailVerified: user.emailVerified ? new Date(user.emailVerified) : null, // Convert to Date or null
+    } : null;
     
     return ( 
         <div className="p-8">
             <Container>
                 <ProductDetails product = {product}/>
                 <div className="flex flex-col mt-20 gap-4">
-                    <AddRating product={product} user={user}/>
+                    <AddRating product={product} user={transformedUser}/>
                     <ListRating product={product}/>
                 </div>
             </Container>

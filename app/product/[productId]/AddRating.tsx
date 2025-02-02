@@ -12,14 +12,26 @@ import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-interface AddRatingProps{
+/* interface AddRatingProps{
     product: Product & {
         reviews: Review[]
     };
     user:(SafeUser & {
         orders: Order[];
     }) | null
-}
+} */
+
+    interface AddRatingProps {
+        product: Product & {
+            reviews: Review[];
+        };
+        user: (Omit<SafeUser, "createdAt" | "updatedAt" | "emailVerified"> & {
+            createdAt: Date;
+            updatedAt: Date;
+            emailVerified: Date | null;
+            orders: Order[];
+        }) | null;
+    }
 
 const AddRating:React.FC<AddRatingProps> = ({product, user}) => {
 
