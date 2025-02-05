@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 import { EventEmitter } from "stream"
 import { buffer } from "stream/consumers"
 import Stripe from "stripe"
+import prisma from '@/libs/prismadb'
 
 
 export const config = {
