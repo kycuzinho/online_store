@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import Input from "../components/inputs/Input";
-import { FieldValues, useForm, SubmitHandler,  } from "react-hook-form";
+import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
 import Button from "../components/Button";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
@@ -11,6 +11,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { SafeUser } from "@/types";
+import { FiLoader } from "react-icons/fi";  // Ícone de carregamento
 
 interface LoginFormProps{
     currentUser: SafeUser | null;
@@ -64,12 +65,6 @@ const LoginForm:React.FC<LoginFormProps> = ({currentUser}) => {
         <>
             <Heading title="Login"/>
 
-            <Button outline
-            label="Continuar com o Google"
-            icon={FcGoogle}
-            onClick={() => {signIn('google')}}
-            />
-
             <hr className="bg-slate-300 w-full h-px"/>
             
             <Input 
@@ -91,11 +86,28 @@ const LoginForm:React.FC<LoginFormProps> = ({currentUser}) => {
             type="password"
             />
 
-            <Button label={isLoading ? 'Loading' : 'Login'} onClick={handleSubmit(onSubmit)}/>
+            <Button 
+                onClick={handleSubmit(onSubmit)}
+                disabled={isLoading}
+            >
+                {isLoading ? (
+                    <FiLoader className="animate-spin" size={24} />  // Apenas o ícone de carregamento enquanto está carregando
+                ) : (
+                    'Login'  // Caso contrário, mostra o texto 'Login'
+                )}
+            </Button>
 
             <p className="text-sm">
                 Não tem uma conta? <Link className="underline" href='/register'>Registar</Link>
             </p>
+
+            <span className="px-2 text-gray-600">OU</span>
+                
+            <Button outline
+            label="Continuar com o Google"
+            icon={FcGoogle}
+            onClick={() => {signIn('google')}}
+            /> 
         </>
      );
 }

@@ -9,6 +9,7 @@ import { signOut } from "next-auth/react";
 import BackDrop from "./BackDrop";
 import { User } from "@prisma/client";
 import { SafeUser } from "@/types";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 
 interface UserMenuProps{
     currentUser: SafeUser | null;
@@ -26,9 +27,8 @@ const UserMenu:React.FC<UserMenuProps> = ({currentUser}) => {
             <div onClick={toggleOpen}
             className="
             p-2
-            border-[1px]
-            border-slate-400
-            bg-emerald-300
+            border-transparent
+            bg-sky-300
             flex
             flex-row
             items-center
@@ -41,7 +41,6 @@ const UserMenu:React.FC<UserMenuProps> = ({currentUser}) => {
             "
             >
                 <Avatar src={currentUser?.image}/> 
-                <AiFillCaretDown />
             </div>
             {isOpen && (
                 <div className="
@@ -63,9 +62,11 @@ const UserMenu:React.FC<UserMenuProps> = ({currentUser}) => {
                         <Link href='/orders'>
                         <MenuItem onClick={toggleOpen}>As suas compras</MenuItem>
                         </Link>
-                        <Link href='/admin'>
-                        <MenuItem onClick={toggleOpen}>Dashboard</MenuItem>
-                        </Link>
+                        {currentUser.role === 'ADMIN' && (
+                                <Link href='/admin'>
+                                    <MenuItem onClick={toggleOpen}>Dashboard</MenuItem>
+                                </Link>
+                            )}
                         <hr />
                         <div className="bg-blue-300">
                             <MenuItem onClick={() => {

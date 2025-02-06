@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import {signIn} from 'next-auth/react'
 import { useRouter } from "next/navigation";
 import { SafeUser } from "@/types";
+import { FiLoader } from "react-icons/fi";
 
 interface RegisterFormProps{
     currentUser: SafeUser | null;
@@ -71,11 +72,6 @@ const RegisterForm:React.FC<RegisterFormProps> = ({currentUser}) => {
         <>
             <Heading title="Registar"/>
 
-            <Button outline
-            label="Entrar com o Google"
-            icon={FcGoogle}
-            onClick={() => {signIn('google')}}
-            />
 
             <hr className="bg-slate-300 w-full h-px"/>
             <Input 
@@ -106,11 +102,28 @@ const RegisterForm:React.FC<RegisterFormProps> = ({currentUser}) => {
             type="password"
             />
 
-            <Button label={isLoading ? 'Loading' : 'Registar'} onClick={handleSubmit(onSubmit)}/>
+            <Button 
+                onClick={handleSubmit(onSubmit)}
+                disabled={isLoading}
+            >
+                {isLoading ? (
+                    <FiLoader className="animate-spin" size={24} />  // Apenas o ícone de carregamento enquanto está carregando
+                ) : (
+                    'Login'  // Caso contrário, mostra o texto 'Login'
+                )}
+            </Button>
 
             <p className="text-sm">
                 Já tem uma conta? <Link className="underline" href='/login'>Log In</Link>
             </p>
+
+            <span className="px-2 text-gray-600">OU</span>
+            
+            <Button outline
+            label="Entrar com o Google"
+            icon={FcGoogle}
+            onClick={() => {signIn('google')}}
+            />
         </>
      );
 }

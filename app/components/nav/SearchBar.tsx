@@ -1,9 +1,12 @@
 'use client'
 
+import { Icon } from "@mui/material";
 import { data } from "autoprefixer";
 import { useRouter } from "next/navigation";
 import queryString from "query-string";
 import {FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { IconType } from "react-icons";
+import { MdSearch } from "react-icons/md";
 
 const SearchBar = () => {
     const router = useRouter();
@@ -28,7 +31,7 @@ const SearchBar = () => {
         reset()
     } 
 
-    return ( <div className="flex items-center">
+    return ( <div className="flex items-center gap-4">
         <input 
         {...register('searchTerm')}
         autoComplete="off"
@@ -38,13 +41,13 @@ const SearchBar = () => {
         p-2
         border 
         border-gray-300 
-        rounded-l-md 
+        rounded-md 
         focus:outline-none
         focus:border-[0.5px]
         focus:border-slate-500
         w-80
         "/>
-        <button onClick={handleSubmit(onSubmit)} className="bg-sky-600 hover:opacity-80 text-white p-2 rounded-r-md">Procurar</button>
+        <button onClick={handleSubmit(onSubmit)} className="bg-sky-600 hover:opacity-80 text-white p-2 rounded-md">Procurar</button>
     </div> 
     );
 }

@@ -1,16 +1,17 @@
 'use client'
 
-import React from "react";
+import React, { ReactNode } from "react";
 import { IconType } from "react-icons";
 
 interface ButtonProps{
-    label: string,
+    label?: string,
     disabled?: boolean,
     outline?: boolean,
     small?: boolean,
     custom?: string,
     icon?: IconType,
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    children?: ReactNode;  // Adicionando children como uma propriedade opcional
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -21,11 +22,12 @@ const Button: React.FC<ButtonProps> = ({
     custom,
     icon: Icon,
     onClick,
+    children,  // Recebe children aqui
 }) => {
     return ( 
         <button 
         onClick={onClick}
-        disabled = {disabled}
+        disabled={disabled}
         className={`
             disabled:opacity-70
             disabled:cursor-not-allowed
@@ -45,8 +47,8 @@ const Button: React.FC<ButtonProps> = ({
             ${custom ? custom : ""}
             `}
         >
-            {Icon && <Icon size={24}/>}
-            {label}
+            {Icon && <Icon size={24} />}
+            {children || label}  {/* Aqui, renderiza o conteúdo de children ou o label */}
         </button>
      );
 }
