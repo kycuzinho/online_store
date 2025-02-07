@@ -7,7 +7,7 @@ const FormWrap = ({children} : {children: React.ReactNode}) => {
         items-center
         justify-center
         pb-12
-        pt-24
+        pt-12
         ">
             <div className="
             max-w-[650px]
@@ -16,7 +16,6 @@ const FormWrap = ({children} : {children: React.ReactNode}) => {
             flex-col
             gap-6
             items-center
-            shadow-xl
             shadow-slate-300
             rounded-md
             p-4

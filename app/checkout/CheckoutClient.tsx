@@ -8,6 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import CheckoutForm from "./CheckoutForm";
 import Button from "../components/Button";
+import { FiLoader } from "react-icons/fi";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string)
 
@@ -75,7 +76,7 @@ const CheckoutClient = () => {
           </Elements>
         )}
 
-        {loading && <div className="text-center">Loading Checkout</div>}
+        {loading && <div className="flex items-center flex-col "><FiLoader className="animate-spin" size={24}/></div>}
         {error && <div className="text-center text-rose-500">Something went wrong</div>}
         
         {paymentSuccess && (

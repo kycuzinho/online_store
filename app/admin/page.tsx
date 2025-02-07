@@ -14,11 +14,11 @@ const Admin = async() => {
     const orders = await getOrders()
     const users = await getUsers()
     const graphData = await getGraphData()
-    //const currentUser = await getCurrentUser()
+    const currentUser = await getCurrentUser()
 
-    //if(!currentUser || currentUser.role != 'ADMIN'){
-    //    return <NullData title="Sem acesso"/>
-    //}
+    if(!currentUser || currentUser.role != 'ADMIN'){
+        return <NullData title="Sem acesso"/>
+    }
 
     return ( 
     <div className="pt-8">
