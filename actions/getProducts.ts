@@ -6,31 +6,35 @@ export interface IProductParams{
     searchTerm?: string | null;
 }
 
-export default async function getProducts(params:IProductParams) {
-    try{
-        const {category, searchTerm} = params;
-        let searchString = searchTerm;
+export default async function getProducts(params: IProductParams) {
+    try {
+        const { category, searchTerm } = params;
+        let searchString = searchTerm || '';
 
-        if(!searchString){
-            searchString = ''
-        }
+        let query: any = {}
 
-        let query:any = {}
-
-        if(category){
-            query.category = category       
+        if (category) {
+            query.category = category;
         }
 
         const products = await prisma.product.findMany({
-            where:{
+            where: {
                 ...query,
                 OR: [
                     {
                         name: {
                             contains: searchString,
                             mode: 'insensitive'
-                        },
-                        description:{
+                        }
+                    },
+                    {
+                        description: {
+                            contains: searchString,
+                            mode: 'insensitive'
+                        }
+                    },
+                    {
+                        category: {
                             contains: searchString,
                             mode: 'insensitive'
                         }
@@ -38,20 +42,19 @@ export default async function getProducts(params:IProductParams) {
                 ]
             },
             include: {
-                reviews:{
-                    include:{
+                reviews: {
+                    include: {
                         user: true
                     },
-                    orderBy:{
+                    orderBy: {
                         createdDate: 'desc'
                     }
                 }
             }
-        })     
-        
-        return products
+        });
 
-    }catch (error: any){
-        throw new Error(error)
+        return products;
+    } catch (error: any) {
+        throw new Error(error);
     }
 }
