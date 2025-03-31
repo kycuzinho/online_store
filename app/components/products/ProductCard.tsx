@@ -7,9 +7,10 @@ import { useRouter } from "next/navigation";
 
 interface ProductCardProp{
     data: any
+    compact?: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProp> = ({data}) => {
+const ProductCard: React.FC<ProductCardProp> = ({data, compact = false}) => {
 
     const router = useRouter();
 

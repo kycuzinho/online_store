@@ -1,5 +1,6 @@
 'use client';
 
+import getProducts from "@/actions/getProducts";
 import Button from "@/app/components/Button";
 import ProductImage from "@/app/components/products/ProductImage";
 import SetColor from "@/app/components/products/SetColor";
@@ -10,9 +11,12 @@ import { Rating } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { MdCheckCircle } from "react-icons/md";
+import Container from "@/app/components/Container";
+import ProductCard from "@/app/components/products/ProductCard";
 
 interface ProductDetailsProps{
     product: any
+    suggestedProducts?: any[];
 }
 
 export type CartProductType = {
@@ -55,8 +59,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
 
     const router = useRouter();
 
-    //console.log(cartProducts);
-
     useEffect(() => {
         setIsProductInCart(false)
 
@@ -67,7 +69,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
                 setIsProductInCart(true);
             }
         }
-    }, [cartProducts])
+    }, [product.id, cartProducts])
 
     const productRating = product.reviews.reduce((acc: number, item: any) =>
         item.rating + acc, 0 ) / product.reviews.length
@@ -76,21 +78,19 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
         setCardProduct((prev) => {
             return {...prev, selectedImg: value}
         })
-    },[cartProduct.selectedImg])
+    },[])
 
     const handleQtyIncrease = useCallback(() => {
-
         if(cartProduct.quantity === 99){
             return;
         }
-
         setCardProduct((prev) => {
             return { ...prev, quantity: prev.quantity + 1};
         });
 
-    }, [cartProduct])
+    }, [cartProduct.quantity])
+    
     const handleQtyDecrease = useCallback(() => {
-
         if(cartProduct.quantity === 1){
             return;
         }
@@ -99,7 +99,33 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
             return { ...prev, quantity: prev.quantity - 1};
         });
 
-    }, [cartProduct])
+    }, [cartProduct.quantity])
+
+    const [suggestedProducts, setSuggestedProducts] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchSuggestedProducts = async () => {
+          try {
+            const res = await fetch(
+              `/api/suggested-products?category=${product.category}&excludeId=${product.id}`
+            );
+            const data = await res.json();
+            setSuggestedProducts(data);
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        };
+      
+        fetchSuggestedProducts();
+      }, [product.category, product.id]);
+
+    function shuffleArray(array: any[]) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
 
     return ( 
         <div className="grid grid-cols-1  md:grid-cols-2 gap-12">
@@ -161,9 +187,21 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
                         />
                     </div>
                 </>}
-                
+            </div>
+            <div className="md:col-span-2">
+            <h2 className="text-2xl font-bold mb-6">Você também pode gostar</h2>
+                <div className="relative">
+                    <div className="flex space-x-4 overflow-x-auto pb-4 -mx-4 px-4">
+                    {suggestedProducts.map((product) => (
+                        <div key={product.id} className="flex-none w-[45%] sm:w-[30%] lg:w-[15%]">
+                        <ProductCard data={product}/>
+                        </div>
+                    ))}
+                    </div>
+                </div>
             </div>
         </div>
+        
      );
 };
  
