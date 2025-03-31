@@ -6,41 +6,23 @@ export interface IProductParams{
     searchTerm?: string | null;
 }
 
+const removeAccents = (str: string) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+};
+
+
 export default async function getProducts(params: IProductParams) {
     try {
         const { category, searchTerm } = params;
-        let searchString = searchTerm || '';
-
         let query: any = {}
 
         if (category) {
             query.category = category;
         }
 
+        // Busca os produtos sem filtrar pelo searchTerm ainda
         const products = await prisma.product.findMany({
-            where: {
-                ...query,
-                OR: [
-                    {
-                        name: {
-                            contains: searchString,
-                            mode: 'insensitive'
-                        }
-                    },
-                    {
-                        description: {
-                            contains: searchString,
-                            mode: 'insensitive'
-                        }
-                    },
-                    {
-                        category: {
-                            contains: searchString,
-                            mode: 'insensitive'
-                        }
-                    }
-                ]
-            },
+            where: { ...query },
             include: {
                 reviews: {
                     include: {
@@ -53,7 +35,17 @@ export default async function getProducts(params: IProductParams) {
             }
         });
 
-        return products;
+        if (!searchTerm) return products;
+
+        // Normaliza o termo de pesquisa
+        const normalizedSearchTerm = removeAccents(searchTerm.toLowerCase());
+
+        // Filtra os produtos no backend
+        return products.filter(product =>
+            removeAccents(product.name.toLowerCase()).includes(normalizedSearchTerm) ||
+            removeAccents(product.description.toLowerCase()).includes(normalizedSearchTerm) ||
+            removeAccents(product.category.toLowerCase()).includes(normalizedSearchTerm)
+        );
     } catch (error: any) {
         throw new Error(error);
     }

@@ -24,10 +24,8 @@ const ProductCard: React.FC<ProductCardProp> = ({data, compact = false}) => {
 
     className="col-span-1 
     cursor-pointer 
-    border-[1.2px]
-    border-slate-200
     bg-slate-50
-    rounded-sm
+    rounded-xl
     p-2
     transition
     hover:scale-105
