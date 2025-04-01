@@ -4,6 +4,7 @@ import { truncateText } from "@/utils/truncateText";
 import { Rating } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { FaBoltLightning } from "react-icons/fa6";
 
 interface ProductCardProp{
     data: any
@@ -23,7 +24,9 @@ const ProductCard: React.FC<ProductCardProp> = ({data, compact = false}) => {
     onClick={() => router.push(`/product/${data.id}`)}
 
     className="col-span-1 
-    cursor-pointer 
+    cursor-pointer
+    border-[2px]
+    border-slate-200 
     bg-slate-50
     rounded-xl
     p-2
@@ -55,10 +58,13 @@ const ProductCard: React.FC<ProductCardProp> = ({data, compact = false}) => {
                 {truncateText(data.name)}
             </div>
             <div>
-                <Rating value={productRating} readOnly/>
+                <Rating value={productRating}
+                    icon={<FaBoltLightning className="text-yellow-500 text-2xl"/>} 
+                    emptyIcon = {<FaBoltLightning className="text-white text-2xl stroke-black stroke-[3px]"/>} 
+                    readOnly/>
             </div>
             <div>
-                {data.reviews.length} reviews
+                {data.reviews.length} Avaliações
             </div>
             <div className="font-semibold">
                 {formatPrice(data.price)}

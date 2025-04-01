@@ -33,11 +33,11 @@ const AdminNav = () => {
                     </Link>
                     
                     <Link href='/admin/manage-products'>
-                        <AdminNavItem icon={MdDns} label="Gerenciar Produtos" selected={pathname === '/admin/manage-products'}/>
+                        <AdminNavItem icon={MdDns} label="Gerir Produtos" selected={pathname === '/admin/manage-products'}/>
                     </Link>
                     
                     <Link href='/admin/manage-orders'>
-                        <AdminNavItem icon={MdFormatListBulleted} label="Gerenciar Pedidos" selected={pathname === '/admin/manage-orders'}/>
+                        <AdminNavItem icon={MdFormatListBulleted} label="Gerir Pedidos" selected={pathname === '/admin/manage-orders'}/>
                     </Link>
                 </div>
             </Container>

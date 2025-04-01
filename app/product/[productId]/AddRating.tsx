@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { FaBoltLightning } from "react-icons/fa6";
 
 /* interface AddRatingProps{
     product: Product & {
@@ -85,7 +86,9 @@ const AddRating:React.FC<AddRatingProps> = ({product, user}) => {
     return ( 
         <div className="flex flex-col gap-2 max-w-[500px]">
             <Heading title="Avalie este produto"/>
-            <Rating onChange={(event, newValue) => {
+            <Rating icon={< FaBoltLightning className="text-yellow-500 text-2xl"/>} 
+                    emptyIcon = {<FaBoltLightning className="text-white text-2xl stroke-black stroke-[3px]"/>}
+                    onChange={(event, newValue) => {
                 setCustomValue('rating', newValue)
             }}/>
 

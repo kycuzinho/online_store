@@ -13,6 +13,7 @@ import { useCallback, useEffect, useState } from "react";
 import { MdCheckCircle } from "react-icons/md";
 import Container from "@/app/components/Container";
 import ProductCard from "@/app/components/products/ProductCard";
+import { FaBoltLightning } from "react-icons/fa6";
 
 interface ProductDetailsProps{
     product: any
@@ -133,8 +134,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
             <div className="flex flex-col gap-1 text-slate-500 text-sm">
                 <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
                 <div className="flex items-center gap-2">
-                    <Rating value={productRating} readOnly/>
-                    <div>{product.reviews.length} reviews</div>
+                    <Rating value={productRating} 
+                        icon={<FaBoltLightning className="text-yellow-500 text-2xl"/>} 
+                        emptyIcon = {<FaBoltLightning className="text-white text-2xl stroke-black stroke-[3px]"/>} readOnly/>
+                    <div>{product.reviews.length} avaliações</div>
                 </div>
                 <Horizontal/>
                 <div className="text-justify">{product.description}</div>
@@ -188,18 +191,20 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
                     </div>
                 </>}
             </div>
-            <div className="md:col-span-2">
-            <h2 className="text-2xl font-bold mb-6">Produtos Relacionados</h2>
-                <div className="relative">
-                    <div className="flex space-x-4 overflow-x-auto pb-4 pt-4 -mx-4 px-4 bg-cyan-50 rounded-lg">
-                    {suggestedProducts.map((product) => (
-                        <div key={product.id} className="flex-none w-[45%] sm:w-[30%] lg:w-[15%]">
-                        <ProductCard data={product}/>
+            {suggestedProducts.length > 0 && (
+                <div className="md:col-span-2">
+                    <h2 className="text-2xl font-bold mb-6">Produtos Relacionados</h2>
+                        <div className="relative">
+                            <div className="flex space-x-4 overflow-x-auto pb-4 pt-4 -mx-4 px-4 bg-cyan-50 rounded-lg">
+                            {suggestedProducts.map((product) => (
+                                <div key={product.id} className="flex-none w-[45%] sm:w-[30%] lg:w-[15%]">
+                                <ProductCard data={product}/>
+                                </div>
+                            ))}
+                            </div>
                         </div>
-                    ))}
-                    </div>
                 </div>
-            </div>
+            )}
         </div>
         
      );

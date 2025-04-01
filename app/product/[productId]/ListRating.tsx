@@ -4,6 +4,7 @@ import Avatar from "@/app/components/Avatar";
 import Heading from "@/app/components/Heading";
 import { Rating } from "@mui/material";
 import moment from "moment";
+import { FaBoltLightning } from "react-icons/fa6";
 
 interface ListRatingProps{
     product: any
@@ -27,7 +28,10 @@ const ListRating:React.FC<ListRatingProps> = ({product}) => {
                     </div>
 
                     <div className="mt-2">
-                        <Rating value={review.rating} readOnly/>
+                        <Rating value={review.rating} 
+                        icon={<FaBoltLightning className="text-yellow-500 text-2xl"/>} 
+                        emptyIcon = {<FaBoltLightning className="text-white text-2xl stroke-black stroke-[3px]"/>}
+                        readOnly/>
                         <div className="ml-2">{review.comment}</div>
                         <hr className="mt-4 mb-4"/>
                     </div>

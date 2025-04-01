@@ -143,7 +143,7 @@ const ManageOrdersClient:React.FC<ManageOrdersClientProps> = ({orders}) => {
             toast.error('Ocorreu um erro')
             console.log(err)
         })
-    },[]);
+    },[router]);
 
     const handleDeliver = useCallback((id: string,) => {
         axios.put('/api/order',{
@@ -156,14 +156,14 @@ const ManageOrdersClient:React.FC<ManageOrdersClientProps> = ({orders}) => {
             toast.error('Ocorreu um erro')
             console.log(err)
         })
-    },[])
+    },[router])
 
 
    
     return ( 
         <div className="max-w-[1150px] m-auto text-xl">
             <div className="mb-4 mt-8" >
-                <Heading title="Gerenciar Pedidos" center/>
+                <Heading title="Gerir Pedidos" center/>
             </div>
 
             <div style={{height: 600, width:'100%'}}>

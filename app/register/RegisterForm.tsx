@@ -35,7 +35,7 @@ const RegisterForm:React.FC<RegisterFormProps> = ({currentUser}) => {
             router.push('/cart')
             router.refresh();
         }
-    }, []);
+    }, [currentUser, router]);
 
     const onSubmit:SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true);
@@ -109,7 +109,7 @@ const RegisterForm:React.FC<RegisterFormProps> = ({currentUser}) => {
                 {isLoading ? (
                     <FiLoader className="animate-spin" size={24} />  // Apenas o ícone de carregamento enquanto está carregando
                 ) : (
-                    'Login'  // Caso contrário, mostra o texto 'Login'
+                    'Registar'  
                 )}
             </Button>
 
