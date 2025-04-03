@@ -13,6 +13,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import moment from "moment";
+import "moment/locale/pt"; 
 
 
 interface OrdersClientProps{
@@ -25,6 +26,7 @@ type ExtendedOrder = Order & {
 
 const OrdersClient:React.FC<OrdersClientProps> = ({orders}) => {
 
+    moment.locale("pt");
     const router = useRouter();
     let rows: any = []
 

@@ -13,6 +13,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import moment from "moment";
+import "moment/locale/pt"; 
 
 
 interface ManageOrdersClientProps{
@@ -25,6 +26,7 @@ type ExtendedOrder = Order & {
 
 const ManageOrdersClient:React.FC<ManageOrdersClientProps> = ({orders}) => {
 
+    moment.locale("pt"); 
     const router = useRouter();
     let rows: any = []
 
@@ -172,7 +174,7 @@ const ManageOrdersClient:React.FC<ManageOrdersClientProps> = ({orders}) => {
                     columns={columns}
                     initialState={{ 
                         pagination: { 
-                            paginationModel: {page: 0, pageSize: 5},
+                            paginationModel: {page: 0, pageSize: 10},
                         } 
                     }}
                     pageSizeOptions={[5, 20]}

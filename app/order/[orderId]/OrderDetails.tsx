@@ -5,6 +5,7 @@ import Status from "@/app/components/Status";
 import { formatPrice } from "@/utils/formatPrice";
 import { Order } from "@prisma/client";
 import moment from "moment";
+import "moment/locale/pt"; 
 import { useRouter } from "next/navigation";
 import { MdAccessTimeFilled, MdDeliveryDining, MdDone } from "react-icons/md";
 import OrderItem from "./OrderItem";
@@ -16,6 +17,7 @@ interface OrderDetailsProps{
 const OrderDetails:React.FC<OrderDetailsProps> = ({order}) => {
 
     //const router = useRouter();
+    moment.locale("pt");
 
     return ( 
         <div className="max-w-[1150px] m-auto flex flex-col gap-2">

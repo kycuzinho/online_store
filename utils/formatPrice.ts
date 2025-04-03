@@ -1,6 +1,6 @@
-export const formatPrice = (amout: number) =>{
+export const formatPrice = (amount: number) =>{
     return new Intl.NumberFormat('pt-pt',{
         style: 'currency',
         currency:'EUR'
-    }).format(amout)
+    }).format(amount)
 };

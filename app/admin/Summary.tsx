@@ -23,27 +23,27 @@ const Summary:React.FC<SummaryProps> = ({orders, products, users}) => {
 
     const [summaryData, setSummaryData] = useState<SummaryDataType>({
         sale:{
-            label: 'Total Sale',
+            label: 'Total de vendas',
             digit: 0
         },
         products:{
-            label: 'Total Products',
+            label: 'Produtos',
             digit: 0
         },
         orders:{
-            label: 'Total Orders',
+            label: 'Pedidos',
             digit: 0
         },
         paidOrders:{
-            label: 'Paid Orders',
+            label: 'Pedidos Pagos',
             digit: 0
         },
         unpaidOrders:{
-            label: 'Unpaid Orders',
+            label: 'Pedidos Por Pagar',
             digit: 0
         },
         users:{
-            label: 'Total Users',
+            label: 'Usuários',
             digit: 0
         },
     })
@@ -84,13 +84,13 @@ const Summary:React.FC<SummaryProps> = ({orders, products, users}) => {
             <div className="mb-4 mt-8">
                 <Heading title="Estatísticas" center/>
             </div>
-            <div className="grid grid-cols-2 gap-3 max-h-50vh overflow-y-auto">
+            <div className="grid grid-cols-3 gap-3 max-h-50vh overflow-y-auto">
                 {
                     summaryKeys && summaryKeys.map((key) => {
                         return <div key={key} className="rounded-xl border-2 p-4 flex flex-col items-center gap-2 transition">
                             <div className="text-xl md:text-4xl font-bold">
                                 {
-                                    summaryData[key].label === 'Total Sale' 
+                                    summaryData[key].label === 'Total de vendas' 
                                     ? 
                                     <>{formatPrice(summaryData[key].digit)}</> 
                                     : 

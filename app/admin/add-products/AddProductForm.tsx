@@ -35,6 +35,19 @@ const AddProductForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [images, setImages] = useState<ImageType[] | null>();
     const [isProductCreated, setIsProductCreated] = useState(false);
+    const [customColors, setCustomColors] = useState<ImageType[]>([]);
+    const [newColor, setNewColor] = useState("#000000"); // Valor inicial (preto)
+
+
+    const addCustomColor = (name: string) => {
+        if (!name) return toast.error("O nome da cor é obrigatório!");
+    
+        setCustomColors((prev) => [
+            ...prev, 
+            { color: name, colorCode: newColor, image: null }
+        ]);
+    };
+    
 
     const {register, handleSubmit, setValue, watch, reset, formState:{errors}} = useForm<FieldValues>({
         defaultValues: {
@@ -140,7 +153,7 @@ const AddProductForm = () => {
         }
 
         await handleImageUploads();
-        const productData = {...data, images: uploadedImages}
+        const productData = {...data, images: uploadedImages, customColors: customColors} 
         
         axios.post('/api/product', productData).then(() => {
             toast.success('Produto criado');
@@ -248,13 +261,36 @@ const AddProductForm = () => {
             </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
-            {colors.map((item, index) => {
-                return <SelectColor key={index} item={item} 
+        {[...colors, ...customColors].map((item, index) => (
+            <SelectColor key={index} item={item} 
                 addImageToState={addImageToState} 
                 removeImageFromState={removeImageFromState} 
-                isProductCreated = {isProductCreated}/>;
-            })}
+                isProductCreated={isProductCreated}
+            />
+        ))}
         </div>
+        <div className="flex gap-2">
+            <Input 
+                id="colorName"
+                label="Nome da Cor"
+                disabled={isLoading}
+                register={register}
+                errors={errors}
+            />
+            <input 
+                type="color" 
+                value={newColor} 
+                onChange={(e) => setNewColor(e.target.value)}
+                className="w-10 h-10 border rounded"
+            />
+
+            <Button label="Adicionar Cor" onClick={() => {
+                const name = watch("colorName");
+                addCustomColor(name);
+                setValue("colorName", "");
+            }}/>
+        </div>
+
     </div>
     <Button label={isLoading? 'A adicionar produto' : 'Adicionar produto'} onClick={handleSubmit(onSubmit)}/>
     </>
