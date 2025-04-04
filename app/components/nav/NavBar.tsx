@@ -8,6 +8,7 @@ import { getCurrentUser } from "@/actions/getCurrentUser";
 import Categories from "./Categories";
 import SearchBar from "./SearchBar";
 import Image from "next/image";
+import DropDownMenu from "./DropDownMenu";
 
 
 const redressed = Redressed({ subsets: ['latin'], weight: ["400"] });// não está a funcionar
@@ -51,7 +52,11 @@ const NavBar = async () => {
                             <div>
                                 <UserMenu  currentUser={currentUser ?? null}/>
                             </div>
+                            <div className="block md:hidden">
+                                <DropDownMenu/>
+                            </div>
                         </div>
+                        
                     </div>
                 </Container>
             </div>

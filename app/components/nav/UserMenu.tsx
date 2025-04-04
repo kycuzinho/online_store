@@ -7,25 +7,25 @@ import Link from "next/link";
 import MenuItem from "./MenuItem";
 import { signOut } from "next-auth/react";
 import BackDrop from "./BackDrop";
-import { User } from "@prisma/client";
 import { SafeUser } from "@/types";
-import { getCurrentUser } from "@/actions/getCurrentUser";
 
-interface UserMenuProps{
-    currentUser: SafeUser | null;
+interface UserMenuProps {
+  currentUser: SafeUser | null;
 }
 
-const UserMenu:React.FC<UserMenuProps> = ({currentUser}) => {
-    const [isOpen, setIsOpen] = useState(false)
+const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-    const toggleOpen = useCallback(() => {
-        setIsOpen(prev => !prev)
-    }, [])
+  const toggleOpen = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
 
-    return ( <>
-        <div className="relative z-30">
-            <div onClick={toggleOpen}
-            className="
+  return (
+    <>
+      <div className="relative group z-30">
+        <div
+          onClick={toggleOpen}
+          className="
             p-2
             border-transparent
             bg-sky-300
@@ -38,62 +38,93 @@ const UserMenu:React.FC<UserMenuProps> = ({currentUser}) => {
             hover:shadow-md
             transition
             text-slate-700
-            "
-            >
-                <Avatar src={currentUser?.image}/> 
-            </div>
-            {isOpen && (
-                <div className="
-                absolute 
-                rounded-md 
-                shadow-md 
-                w-[170px]
-                bg-white
-                overflow-hidden
-                right-0
-                top-12
-                text-sm
-                flex
-                flex-col
-                cursor-pointer
-                ">
-                    {currentUser ? 
-                    <div>
-                        <Link href='/orders'>
-                        <MenuItem onClick={toggleOpen}>As suas compras</MenuItem>
-                        </Link>
-                        {currentUser.role === 'ADMIN' && (
-                                <Link href='/admin'>
-                                    <MenuItem onClick={toggleOpen}>Dashboard</MenuItem>
-                                </Link>
-                            )}
-                        <hr />
-                        <div className="bg-blue-300">
-                            <MenuItem onClick={() => {
-                                toggleOpen();
-                                signOut();
-                            }}>
-                                Logout
-                            </MenuItem>
-                        </div>
-                    </div> 
-                    : 
-                    <div>
-                        <Link href='/login'>
-                            <MenuItem onClick={toggleOpen}>Login</MenuItem>
-                        </Link>
-                        <Link href='/register'>
-                            <MenuItem onClick={toggleOpen}>Registar</MenuItem>
-                        </Link>
-                    </div>
-                    }
-                    
-                    
-                </div>
-            )}
+          "
+        >
+          <Avatar src={currentUser?.image} />
         </div>
-        {isOpen ? <BackDrop onClick={toggleOpen}/> : null}
-    </> );
-}
- 
+
+        {currentUser?.name && (
+          <div
+            className="
+              absolute 
+              top-full 
+              mt-2
+              left-1/2 
+              -translate-x-1/2
+              whitespace-nowrap 
+              bg-gray-800 
+              text-white 
+              text-xs 
+              rounded 
+              px-2 
+              py-1
+              opacity-0 
+              group-hover:opacity-100 
+              transition-opacity 
+              duration-300 
+              pointer-events-none
+            "
+          >
+            {currentUser.name}
+          </div>
+        )}
+
+        {isOpen && (
+          <div
+            className="
+              absolute 
+              rounded-md 
+              shadow-md 
+              w-[170px]
+              bg-white
+              overflow-hidden
+              right-0
+              top-12
+              text-sm
+              flex
+              flex-col
+              cursor-pointer
+            "
+          >
+            {currentUser ? (
+              <div>
+                <Link href="/orders">
+                  <MenuItem onClick={toggleOpen}>As suas compras</MenuItem>
+                </Link>
+                {currentUser.role === "ADMIN" && (
+                  <Link href="/admin">
+                    <MenuItem onClick={toggleOpen}>Dashboard</MenuItem>
+                  </Link>
+                )}
+                <hr />
+                <div className="bg-blue-300">
+                  <MenuItem
+                    onClick={() => {
+                      toggleOpen();
+                      signOut();
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <Link href="/login">
+                  <MenuItem onClick={toggleOpen}>Login</MenuItem>
+                </Link>
+                <Link href="/register">
+                  <MenuItem onClick={toggleOpen}>Registar</MenuItem>
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {isOpen && <BackDrop onClick={toggleOpen} />}
+    </>
+  );
+};
+
 export default UserMenu;
