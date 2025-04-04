@@ -32,7 +32,7 @@ const Footer = () => {
                 <div className="w-full md:w-1/3 mb-6 md:mb-0 mr-5">
                     <h3 className="text-base font-bold mb-2">Sobre o Projeto</h3>
                     <p className="mb-2"> Blah BlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlah</p>
-                    <p>&copy; {new Date().getFullYear()} Online Store. Direitos Reservados a Mim.</p>
+                    <p>&copy; {new Date().getFullYear()} Bit&Volt. Direitos Reservados a Mim.</p>
                 </div>
 
                 <FooterList>

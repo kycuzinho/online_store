@@ -7,6 +7,8 @@ import UserMenu from "./UserMenu";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import Categories from "./Categories";
 import SearchBar from "./SearchBar";
+import Image from "next/image";
+
 
 const redressed = Redressed({ subsets: ['latin'], weight: ["400"] });// não está a funcionar
 
@@ -34,9 +36,14 @@ const NavBar = async () => {
                     gap-3
                     md:gap-0
                     ">
-                        <Link href="/" 
-                            className="font-bold">
-                            Online Store
+                        <Link href="/" className="flex items-center">
+                            <Image 
+                                src="/logo.png"        
+                                alt="Online Store Logo"
+                                width={60}             
+                                height={60}
+                                className="object-contain"
+                            />
                         </Link>
                         <div className="hidden md:block"><SearchBar/></div>
                         <div className="flex items-center gap-8 md:gap-12">

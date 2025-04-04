@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 import { IconType } from "react-icons";
 
 interface ButtonProps{
-    label?: string,
+    label?: string | ReactNode,
     disabled?: boolean,
     outline?: boolean,
     small?: boolean,

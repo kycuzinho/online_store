@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { FiLoader } from "react-icons/fi";
 
 export type ImageType = {
     color: string;
@@ -269,30 +270,35 @@ const AddProductForm = () => {
             />
         ))}
         </div>
-        <div className="flex gap-2">
-            <Input 
-                id="colorName"
-                label="Nome da Cor"
-                disabled={isLoading}
-                register={register}
-                errors={errors}
-            />
-            <input 
-                type="color" 
-                value={newColor} 
-                onChange={(e) => setNewColor(e.target.value)}
-                className="w-10 h-10 border rounded"
-            />
+        <div className="flex flex-col gap-2">
+            <div className="flex gap-2">
+                <Input 
+                    id="colorName"
+                    label="Nome da Cor"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                />
+                <input 
+                    type="color" 
+                    value={newColor} 
+                    onChange={(e) => setNewColor(e.target.value)}
+                    className="w-[10vh] h-[5vh] border rounded"
+                />
+            </div>
 
-            <Button label="Adicionar Cor" onClick={() => {
-                const name = watch("colorName");
-                addCustomColor(name);
-                setValue("colorName", "");
-            }}/>
+            <Button 
+                outline 
+                label="Adicionar Cor" 
+                onClick={() => {
+                    const name = watch("colorName");
+                    addCustomColor(name);
+                    setValue("colorName", "");
+                }}
+            />
         </div>
-
     </div>
-    <Button label={isLoading? 'A adicionar produto' : 'Adicionar produto'} onClick={handleSubmit(onSubmit)}/>
+    <Button label={isLoading? (<FiLoader className="animate-spin" size={24} />) : 'Adicionar produto'} onClick={handleSubmit(onSubmit)}/>
     </>
     );
 }

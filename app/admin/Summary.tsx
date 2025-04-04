@@ -84,7 +84,7 @@ const Summary:React.FC<SummaryProps> = ({orders, products, users}) => {
             <div className="mb-4 mt-8">
                 <Heading title="Estatísticas" center/>
             </div>
-            <div className="grid grid-cols-3 gap-3 max-h-50vh overflow-y-auto">
+            <div className="grid md:grid-cols-3 gap-3 max-h-50vh overflow-y-auto">
                 {
                     summaryKeys && summaryKeys.map((key) => {
                         return <div key={key} className="rounded-xl border-2 p-4 flex flex-col items-center gap-2 transition">
