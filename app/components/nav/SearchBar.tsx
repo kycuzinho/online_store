@@ -17,7 +17,7 @@ const SearchBar = () => {
         if (!data.searchTerm) return router.push('/');
             
         const url = queryString.stringifyUrl({
-            url: '/',
+            url: '/search',
             query: {
                 searchTerm: data.searchTerm
             }
