@@ -59,11 +59,6 @@ const DropDownMenu = () => {
             <SearchBar onSearchComplete={closeMenu} />
           </div>
         )}
-
-        {/* Em ecrãs maiores, a barra aparece sempre */}
-        {/* <div className="hidden md:block w-full max-w-md">
-          <SearchBar />
-        </div> */}
       </div>
 
       {isOpen && <BackDrop onClick={toggleOpen} />}
