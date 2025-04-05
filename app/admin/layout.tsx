@@ -1,7 +1,7 @@
 import AdminNav from "../components/admin/AdminNav";
 
 export const metadata = {
-    title: 'Online Store Admin',
+    title: 'Bit&Volt Admin',
     description: 'Online Store Admin Dashboard',
 }
 

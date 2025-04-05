@@ -10,15 +10,17 @@ interface StatusProps{
 const Status:React.FC<StatusProps> = ({ text, icon: Icon, bg, color}) => {
     return ( 
         <div className={`
-            flex
-            px-2
-            rounded
+            inline-flex
             items-center
             gap-1
+            px-2
+            py-1
+            rounded
             ${bg}
             ${color}
         `}>
-            {text} <Icon size={15}/>
+            <span className="leading-tight">{text}</span>
+            <Icon size={15} />
         </div>
      );
 }

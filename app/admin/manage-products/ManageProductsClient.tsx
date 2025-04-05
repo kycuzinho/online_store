@@ -54,13 +54,14 @@ const ManageProductsClient:React.FC<ManageProductsClientProps> = ({products}) =>
         {field: 'inStock', headerName: 'Stock', width: 120, 
             renderCell: (params) => {
                 return(
-                <div className="flex justify-start">
+                <div className="">
                     {params.row.inStock === true ? (
                         <Status 
                             text="Em Stock" 
                             icon={MdDone} 
                             bg="bg-teal-200"
                             color="text-teal-700"
+                            
                         /> 
                         )    :  (
                         <Status 
@@ -76,8 +77,8 @@ const ManageProductsClient:React.FC<ManageProductsClientProps> = ({products}) =>
         {field: 'action', headerName: 'Açoes', width: 200,
             renderCell: (params) => {
                 return(
-                <div className="flex justify-between gap-4 w-full">
-                    <ActionBtn icon={MdCached} onClick={() => {
+                <div className="flex justify-between w-full mt-1">
+                    <ActionBtn icon={MdCached}  onClick={() => {
                         handleToggleStock(params.row.id, params.row.inStock)
                     
                     }}/>

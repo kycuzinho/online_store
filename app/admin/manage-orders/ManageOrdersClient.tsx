@@ -80,7 +80,7 @@ const ManageOrdersClient:React.FC<ManageOrdersClientProps> = ({orders}) => {
         {field: 'deliveryStatus', headerName: 'Estado de Entrega', width: 130, 
             renderCell: (params) => {
                 return(
-                <div className="flex justify-start">
+                <div>
                     {params.row.deliveryStatus === 'pending' ? (
                         <Status 
                             text="Pendente" 

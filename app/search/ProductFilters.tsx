@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { FaFilter } from "react-icons/fa6";
 import { FaFilterCircleXmark } from "react-icons/fa6";
+import { IoCloseCircle } from "react-icons/io5";
 
 const ProductFilters = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,16 +48,25 @@ const ProductFilters = () => {
 
   return (
     <div className="mb-4">
-      <button
-        onClick={toggleOpen}
-        className="mb-2 px-4 py-2 bg-sky-600 hover:bg-sky-800 text-white rounded"
-      >
-        {isOpen ? <FaFilterCircleXmark /> : <FaFilter />}
-      </button>
+      <div /* className="hidden md:block" */>
+        <button
+          onClick={toggleOpen}
+          className="mb-2 px-4 py-2 bg-sky-600 hover:bg-sky-800 text-white rounded"
+        >
+          {isOpen ? <FaFilterCircleXmark /> : <FaFilter />}
+        </button>
+      </div>
+
+
+      {/* Pop Up Filter button */}
+      {/* <div className="block md:hidden">
+        
+      </div> */}
+      
 
       {isOpen && (
         <div className="
-        absolute
+        fixed
         top-1/2
         left-1/2
         -translate-x-1/2
@@ -73,12 +83,19 @@ const ProductFilters = () => {
         flex-col
         gap-4
       ">
+        <div className="fixed right-4" >
+          <button 
+          onClick={toggleOpen}>
+            <IoCloseCircle size={30} className="text-sky-600"/>
+          </button>
+        </div>
+
         <input
           type="number"
           placeholder="Preço mínimo"
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
-          className="border p-2 rounded w-full sm:w-40"
+          className="border p-2 rounded w-52 md:w-72"
         />
       
         <input
@@ -86,7 +103,7 @@ const ProductFilters = () => {
           placeholder="Preço máximo"
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
-          className="border p-2 rounded w-full sm:w-40"
+          className="border p-2 rounded w-52 md:w-72"
         />
       
         <button
