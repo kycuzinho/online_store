@@ -3,6 +3,7 @@ import ManageProductsClient from "./ManageProductsClient";
 import getProducts from "@/actions/getProducts";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import NullData from "@/app/components/NullData";
+import { redirect } from "next/navigation";
 
 const ManageProducts = async() => {
 
@@ -10,7 +11,9 @@ const ManageProducts = async() => {
     const currentUser = await getCurrentUser()
 
     if(!currentUser || currentUser.role != 'ADMIN'){
-        return <NullData title="Sem acesso"/>
+        /* return <NullData title="Sem acesso"/> */
+        
+        redirect("/")
     }
 
     return (

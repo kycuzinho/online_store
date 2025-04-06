@@ -7,6 +7,7 @@ import { getCurrentUser } from "@/actions/getCurrentUser";
 import NullData from "../components/NullData";
 import BarGraph from "./BarGraph";
 import getGraphData from "@/actions/getGraphData";
+import { redirect } from "next/navigation";
 
 const Admin = async() => {
 
@@ -17,7 +18,10 @@ const Admin = async() => {
     const currentUser = await getCurrentUser()
 
     if(!currentUser || currentUser.role != 'ADMIN'){
-        return <NullData title="Sem acesso"/>
+
+        redirect("/")
+
+        /* return <NullData title="Sem acesso"/> */
     }
 
     return ( 

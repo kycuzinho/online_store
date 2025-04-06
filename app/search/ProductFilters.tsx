@@ -5,6 +5,7 @@ import { useCallback, useState } from "react";
 import { FaFilter } from "react-icons/fa6";
 import { FaFilterCircleXmark } from "react-icons/fa6";
 import { IoCloseCircle } from "react-icons/io5";
+import { categories } from "@/utils/Categories";
 
 const ProductFilters = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,9 +19,11 @@ const ProductFilters = () => {
 
   const minParam = searchParams?.get("minPrice") || "";
   const maxParam = searchParams?.get("maxPrice") || "";
+  const categoryParam = searchParams?.get("category") || "";
 
   const [minPrice, setMinPrice] = useState(minParam);
   const [maxPrice, setMaxPrice] = useState(maxParam);
+  const [selectedCategory, setSelectedCategory] = useState(categoryParam);
 
   const handleFilter = () => {
     const params = new URLSearchParams(searchParams?.toString());
@@ -31,6 +34,12 @@ const ProductFilters = () => {
     if (maxPrice) params.set("maxPrice", maxPrice.toString());
     else params.delete("maxPrice");
 
+    if (selectedCategory && selectedCategory !== "Todos") {
+      params.set("category", selectedCategory);
+    } else {
+      params.delete("category");
+    }
+
     router.push(`/search?${params.toString()}`);
 
     setIsOpen(false);
@@ -40,9 +49,11 @@ const ProductFilters = () => {
     const params = new URLSearchParams(searchParams?.toString());
     params.delete("minPrice");
     params.delete("maxPrice");
+    params.delete("category");
 
     setMinPrice("");
     setMaxPrice("");
+    setSelectedCategory("");
     router.push(`/search?${params.toString()}`);
   };
 
@@ -57,13 +68,11 @@ const ProductFilters = () => {
         </button>
       </div>
 
-
       {/* Pop Up Filter button */}
       {/* <div className="block md:hidden">
         
       </div> */}
       
-
       {isOpen && (
         <div className="
         fixed
@@ -90,12 +99,25 @@ const ProductFilters = () => {
           </button>
         </div>
 
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className="border p-2 w-52 md:w-72"
+        >
+          <option value="">Selecione a categoria</option>
+          {categories.map((item) => (
+            <option key={item.label} value={item.label}>
+              {item.label}
+            </option>
+          ))}
+        </select>
+
         <input
           type="number"
           placeholder="Preço mínimo"
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
-          className="border p-2 rounded w-52 md:w-72"
+          className="border p-2 w-52 md:w-72"
         />
       
         <input
@@ -103,7 +125,7 @@ const ProductFilters = () => {
           placeholder="Preço máximo"
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
-          className="border p-2 rounded w-52 md:w-72"
+          className="border p-2 w-52 md:w-72"
         />
       
         <button
@@ -120,7 +142,6 @@ const ProductFilters = () => {
           Limpar Filtros
         </button>
       </div>
-      
       )}
     </div>
   );

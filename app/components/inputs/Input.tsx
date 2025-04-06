@@ -1,8 +1,10 @@
 'use client'
 
+import { useState } from "react";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-interface InputProps{
+interface InputProps {
     id: string;
     label: string;
     type?: string;
@@ -15,12 +17,14 @@ interface InputProps{
 const Input: React.FC<InputProps> = ({
     id,
     label,
-    type,
+    type = "text",
     disabled,
     required,
     register,
     errors,
 }) => {
+    const [showPassword, setShowPassword] = useState(false);
+    
     return ( 
     <div className="w-full relative">
         <input 
@@ -29,7 +33,7 @@ const Input: React.FC<InputProps> = ({
         disabled={disabled}
         {...register(id, {required})}
         placeholder=""
-        type={type}
+        type={type === "password" ? (showPassword ? "text" : "password") : type}
         className={`
         peer
         w-full
@@ -45,6 +49,7 @@ const Input: React.FC<InputProps> = ({
         disabled:cursor-not-allowed
         ${errors[id] ? 'border-rose-500' : 'border-slate-300'}
         ${errors[id] ? 'focus:border-rose-500' : 'focus:border-slate-300'}
+        ${type === "password" ? 'pr-10' : ''}
         `
         }/>
         <label htmlFor={id}
@@ -66,6 +71,16 @@ const Input: React.FC<InputProps> = ({
         ${errors[id] ? 'text-rose-500' : 'text-slate-500'}
         `}
         >{label}</label>
+        
+        {type === "password" && (
+          <button
+            type="button"
+            onClick={() => setShowPassword(prev => !prev)}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+          >
+            {showPassword ? <FaEye size={26} /> : <FaEyeSlash size={26} />}
+          </button>
+        )}
     </div> 
     );
 }
