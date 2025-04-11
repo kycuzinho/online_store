@@ -11,7 +11,7 @@ export async function GET(request: Request) {
 
   try {
     const products = await getProducts(params);
-    const filtered = products.filter(p => p.id !== params.excludeId).slice(0, 4);
+    const filtered = products.filter(p => p.id !== params.excludeId).slice(0, 10);
     return NextResponse.json(filtered);
   } catch (error) {
     return NextResponse.json(

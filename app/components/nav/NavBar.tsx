@@ -9,6 +9,7 @@ import Categories from "./Categories";
 import SearchBar from "./SearchBar";
 import Image from "next/image";
 import DropDownMenu from "./DropDownMenu";
+import WishListBtn from "./WishListBtn";
 
 
 const redressed = Redressed({ subsets: ['latin'], weight: ["400"] });// não está a funcionar

@@ -91,6 +91,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 <Link href="/orders">
                   <MenuItem onClick={toggleOpen}>As suas compras</MenuItem>
                 </Link>
+                <Link href="/wishlist">
+                  <MenuItem onClick={toggleOpen}>Lista de desejos</MenuItem>
+                </Link>
                 {currentUser.role === "ADMIN" && (
                   <Link href="/admin">
                     <MenuItem onClick={toggleOpen}>Dashboard</MenuItem>

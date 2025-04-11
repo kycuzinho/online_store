@@ -13,7 +13,9 @@ import { useCallback, useEffect, useState } from "react";
 import { MdCheckCircle } from "react-icons/md";
 import Container from "@/app/components/Container";
 import ProductCard from "@/app/components/products/ProductCard";
-import { FaBoltLightning } from "react-icons/fa6";
+import { FaBoltLightning, FaHeart } from "react-icons/fa6";
+import { useWishList } from "@/hooks/useWishList";
+import { FaRegHeart } from "react-icons/fa";
 
 interface ProductDetailsProps{
     product: any
@@ -31,6 +33,16 @@ export type CartProductType = {
     price: number
 }
 
+export type WishListProdutType = {
+    id: string,
+    name: string,
+    description: string,
+    category: string,
+    brand: string,
+    selectedImg: SelectedImgType,
+    price: number
+}
+
 export type SelectedImgType = {
     color: string,
     colorCode: string,
@@ -44,10 +56,12 @@ const Horizontal = () => {
 const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
 
     const {handleAddProductToCart, cartProducts} = useCart();
+    const {handleAddProductToWishList, handleRemoveProductFromWishList, wishListProducts} = useWishList();
 
     const [isProductInCart, setIsProductInCart] = useState(false);
+    const [isProductInWishList, setIsProductInWishList] = useState(false);
     
-    const [cartProduct, setCardProduct] = useState<CartProductType>({
+    const [cartProduct, setCartProduct] = useState<CartProductType>({
         id: product.id,
         name: product.name,
         description: product.description,
@@ -55,6 +69,16 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
         brand: product.brand,
         selectedImg: {...product.images[0]},
         quantity: 1,
+        price: product.price,
+    });
+
+    const [wishListProduct, setWishListProduct] = useState<WishListProdutType>({
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        category: product.category,
+        brand: product.brand,
+        selectedImg: {...product.images[0]},
         price: product.price,
     });
 
@@ -72,11 +96,23 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
         }
     }, [product.id, cartProducts])
 
+    useEffect(() => {
+        setIsProductInWishList(false)
+
+        if(wishListProducts){
+            const existingIndex = wishListProducts.findIndex((item) => item.id === product.id) 
+            
+            if(existingIndex > -1){
+                setIsProductInWishList(true);
+            }
+        }
+    }, [product.id, wishListProducts])
+
     const productRating = product.reviews.reduce((acc: number, item: any) =>
         item.rating + acc, 0 ) / product.reviews.length
  
     const handleColorSelect = useCallback((value: SelectedImgType) => {
-        setCardProduct((prev) => {
+        setCartProduct((prev) => {
             return {...prev, selectedImg: value}
         })
     },[])
@@ -85,7 +121,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
         if(cartProduct.quantity === 99){
             return;
         }
-        setCardProduct((prev) => {
+        setCartProduct((prev) => {
             return { ...prev, quantity: prev.quantity + 1};
         });
 
@@ -96,7 +132,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
             return;
         }
 
-        setCardProduct((prev) => {
+        setCartProduct((prev) => {
             return { ...prev, quantity: prev.quantity - 1};
         });
 
@@ -132,7 +168,22 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
         <div className="grid grid-cols-1  md:grid-cols-2 gap-12">
             <ProductImage cartProduct={cartProduct} product={product} handleColorSelect={handleColorSelect}/>
             <div className="flex flex-col gap-1 text-slate-500 text-sm">
-                <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
+                <div className="flex items-center gap-2">
+                    <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
+                    <div
+                    className="cursor-pointer hover:scale-105">
+                        {isProductInWishList 
+                        ? 
+                        <>
+                        <FaHeart size={28} onClick={() => handleRemoveProductFromWishList(wishListProduct)}/>
+                        </> 
+                        :  
+                        <>
+                        <FaRegHeart size={28} onClick={() => handleAddProductToWishList(wishListProduct)}/> 
+                        </> 
+                        }
+                    </div>
+                </div>
                 <div className="flex items-center gap-2">
                     <Rating value={productRating} 
                         icon={<FaBoltLightning className="text-yellow-500 text-2xl"/>} 
@@ -183,7 +234,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
                     handleQtyDecrease={handleQtyDecrease}
                     />
                     <Horizontal/>
-                    <div className="max-w-[300px]">
+                    <div className="max-w-[300px] flex items-center gap-4">
                         <Button 
                         label="Adicionar ao Carrinho"
                         onClick={()=> handleAddProductToCart(cartProduct)}
