@@ -175,11 +175,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
                         {isProductInWishList 
                         ? 
                         <>
-                        <FaHeart size={28} onClick={() => handleRemoveProductFromWishList(wishListProduct)}/>
+                        <FaHeart size={28} className="text-sky-800" onClick={() => handleRemoveProductFromWishList(wishListProduct)}/>
                         </> 
                         :  
                         <>
-                        <FaRegHeart size={28} onClick={() => handleAddProductToWishList(wishListProduct)}/> 
+                        <FaRegHeart size={28} className="text-sky-800" onClick={() => handleAddProductToWishList(wishListProduct)}/> 
                         </> 
                         }
                     </div>

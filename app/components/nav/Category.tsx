@@ -60,7 +60,7 @@ const Category:React.FC<CategoryProps> = ({label, icon:Icon, selected}) => {
         cursor-pointer
         ${selected ? 'border-b-slate-800 text-slate-800' : 'border-transparent text-slate-500'}
         `}>
-            <Icon size={20}/>
+            <Icon size={30}/>
             <div className="font-medium text-sm">{label}</div>
         </div>
     );

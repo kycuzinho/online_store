@@ -6,6 +6,7 @@ import { useState, useCallback } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import SearchBar from "./SearchBar";
 import BackDrop from "./BackDrop";
+import { FaSearchengin } from "react-icons/fa";
 
 const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,20 +24,18 @@ const DropDownMenu = () => {
         <div
           onClick={toggleOpen}
           className="
-            p-2
-            bg-sky-300
+            pr-2
             text-white
             flex
             items-center
             justify-center
             rounded-full
             cursor-pointer
-            hover:bg-sky-300
             transition
             md:hidden
           "
         >
-          <AiOutlineSearch size={20} className="text-sky-950"/>
+          <FaSearchengin size={30} className="text-sky-950"/>
         </div>
 
         {/* Caixa flutuante apenas no mobile */}

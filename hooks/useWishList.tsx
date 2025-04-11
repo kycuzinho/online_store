@@ -53,7 +53,7 @@ export const WishListContextProvider = (props: Props) => {
             })
 
             setWishListProducts(filteredProducts)
-            toast.success('Removido Da Lista de Desejos');
+            toast.error('Removido Da Lista de Desejos');
 
             localStorage.setItem('eShopWishListItems', JSON.stringify(filteredProducts))
         }

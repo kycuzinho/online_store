@@ -113,6 +113,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
               </div>
             ) : (
               <div>
+                <Link href="/wishlist">
+                  <MenuItem onClick={toggleOpen}>Lista de desejos</MenuItem>
+                </Link>
                 <Link href="/login">
                   <MenuItem onClick={toggleOpen}>Login</MenuItem>
                 </Link>

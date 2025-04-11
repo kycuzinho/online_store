@@ -12,6 +12,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['400', '700'] });
 export const metadata: Metadata = {
   title: 'Bit&Volt',
   description: 'Online Store for PAP',
+  icons: 'banner-image.png'
 }
 
 export default async function RootLayout({

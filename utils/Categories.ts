@@ -1,10 +1,10 @@
 import { AiFillCode, AiOutlineBuild, AiOutlineWifi } from "react-icons/ai";
-import { MdBatteryChargingFull, MdBuild, MdSensors, MdStorefront} from "react-icons/md";
+import { MdBatteryChargingFull, MdBuild, MdOutlineStoreMallDirectory, MdSensors, MdStorefront} from "react-icons/md";
 
 export const categories = [
     {
         label: 'Todos',
-        icon: MdStorefront
+        icon: MdOutlineStoreMallDirectory 
     },
     {
         label: 'Microcontroladores e Módulos',

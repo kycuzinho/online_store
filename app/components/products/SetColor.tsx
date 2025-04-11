@@ -28,7 +28,7 @@ const SetColor: React.FC<SetColorProps> = ({
                             h-7
                             w-7
                             rounded-full
-                            border-teal-300
+                            border-sky-900
                             flex
                             items-center
                             justify-center
