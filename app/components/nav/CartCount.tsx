@@ -9,7 +9,7 @@ const CartCount = () => {
 
     const router = useRouter()
 
-    return ( <div className="relative cursor-pointer" onClick={() => router.push('/cart')}>
+    return ( <div className="relative cursor-pointer z-30" onClick={() => router.push('/cart')}>
         <div className="text-3xl">
             <TbShoppingCartBolt />
         </div>

@@ -19,7 +19,7 @@ const DropDownMenu = () => {
 
   return (
     <>
-      <div className="relative z-30">
+      <div className="relative z-50">
         {/* Botão visível apenas em mobile */}
         <div
           onClick={toggleOpen}
@@ -51,7 +51,7 @@ const DropDownMenu = () => {
               shadow-md
               rounded-md
               p-4
-              z-50
+              z-22
               md:hidden
             "
           >

@@ -35,32 +35,54 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchComplete }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-4 w-full">
+    <form 
+      onSubmit={handleSubmit(onSubmit)} 
+      className="flex flex-col sm:flex-row items-center gap-3  w-full  rounded-2xltransition-all duration-300"
+    >
       <input
         {...register('searchTerm')}
         autoComplete="off"
         type="text"
         placeholder="O que está à procura?"
         className="
-          p-2
+          w-full 
+          px-5
+          py-3
+          text-sm 
           border 
           border-gray-300 
-          rounded-md 
-          focus:outline-none
-          focus:border-[0.5px]
-          focus:border-slate-500
-          w-full
+          rounded-xl 
+          focus:outline-none 
+          focus:ring-2 
+          focus:ring-sky-500 
+          focus:border-transparent 
+          transition-all 
+          duration-300
         "
         aria-label="Search input"
       />
       <button
         type="submit"
-        className="bg-sky-600 hover:opacity-80 text-white p-2 rounded-md"
+        className="
+          w-full sm:w-auto 
+          px-5 
+          py-3
+          text-sm 
+          font-medium 
+          bg-sky-600 
+          text-white 
+          rounded-xl 
+          hover:bg-sky-700 
+          active:scale-95 
+          transition-all 
+          duration-300
+        "
         aria-label="Search button"
       >
         Procurar
       </button>
     </form>
+
   );
 };
 
