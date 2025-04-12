@@ -6,6 +6,7 @@ import Footer from './components/footer/Footer';
 import CartProvider from '@/providers/CartProvider';
 import { Toaster } from 'react-hot-toast';
 import WishListProvider from '@/providers/WishListProvider';
+import { Analytics } from "@vercel/analytics/react"
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -36,6 +37,7 @@ export default async function RootLayout({
               <NavBar/>
               <main className='flex-grow'>
                 {children}
+                <Analytics />
               </main>
 
               <Footer/>
