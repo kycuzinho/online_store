@@ -115,6 +115,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
         setCartProduct((prev) => {
             return {...prev, selectedImg: value}
         })
+        setWishListProduct((prev) => {
+            return {...prev, selectedImg: value}
+        })
     },[])
 
     const handleQtyIncrease = useCallback(() => {

@@ -33,16 +33,22 @@ const ProductImage: React.FC<ProductImageProps> = ({
             sm:flex-col
             flex-row
             items-center
-            justify-center
+            justify-start
             gap-4
             cursor-pointer
             border
             h-full
+            max-h-full
+            overflow-x-auto
+            sm:overflow-x-hidden
+            sm:overflow-y-auto
             sm:col-span-1
             row-span-1
             sm:row-span-full
             order-2
             sm:order-1
+            p-2
+            scroll-smooth
           ">
             {product.images.map((image: SelectedImgType) => (
               <div
@@ -55,6 +61,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
                   aspect-square
                   rounded
                   border-sky-900
+                  shrink-0
                   ${cartProduct.selectedImg.color === image.color ? 'border-[1.5px]' : 'border-none'}
                 `}
               >
@@ -62,6 +69,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
               </div>
             ))}
           </div>
+
       
           {/* Main Image */}
           <div className="
