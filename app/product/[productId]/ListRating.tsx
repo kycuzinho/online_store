@@ -4,6 +4,8 @@ import Avatar from "@/app/components/Avatar";
 import Heading from "@/app/components/Heading";
 import { Rating } from "@mui/material";
 import moment from "moment";
+import 'moment/locale/pt';
+
 import { FaBoltLightning } from "react-icons/fa6";
 
 interface ListRatingProps{
@@ -11,6 +13,8 @@ interface ListRatingProps{
 }
 
 const ListRating:React.FC<ListRatingProps> = ({product}) => {
+
+    moment.locale('pt-pt');
 
     if(product.reviews.length === 0) return null   
 

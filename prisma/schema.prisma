@@ -55,6 +55,7 @@ model Product{
   inStock Boolean
   images Image[]
   reviews Review[]
+  salesCount  Int        @default(0)
 }
 
 model Review{

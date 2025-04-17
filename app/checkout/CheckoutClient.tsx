@@ -54,7 +54,7 @@ const CheckoutClient = () => {
         })
         }
 
-    },[cartProducts, paymentIntent])
+    },[cartProducts, paymentIntent, handleSetPaymentIntent, router])
 
     const options: StripeElementsOptions= {
         clientSecret,
@@ -77,13 +77,13 @@ const CheckoutClient = () => {
         )}
 
         {loading && <div className="flex items-center flex-col "><FiLoader className="animate-spin" size={24}/></div>}
-        {error && <div className="text-center text-rose-500">Something went wrong</div>}
+        {error && <div className="text-center text-rose-500">Algo correu mal</div>}
         
         {paymentSuccess && (
         <div className="flex items-center flex-col gap-4">
-            <div className="text-teal-500 text-center">Payment Success</div>
+            {/* <div className="text-teal-500 text-center">Payment Success</div> */}
             <div className="max-w-[200px] w-full">
-                <Button label="View Orders" onClick={() => router.push('/orders')}/>
+                <Button label="Ver as suas compras" onClick={() => router.push('/orders')}/>
             </div>
         </div>
         )}

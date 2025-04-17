@@ -22,7 +22,7 @@ const Footer = () => {
                 </FooterList>
                 
                 <FooterList>
-                    <h3 className="text-base font-bold mb-2">Serviçoes do Usuario</h3>
+                    <h3 className="text-base font-bold mt-10 md:mt-0 mb-2">Serviçoes do Usuario</h3>
                     <Link href='#'> Contacte-nos </Link>
                     <Link href='#'> Politica de Envio </Link>
                     <Link href='#'> Devoluções e Entregas </Link>
@@ -30,7 +30,7 @@ const Footer = () => {
                 </FooterList>
 
                 <div className="w-full md:w-1/3 mb-6 md:mb-0 mr-5">
-                    <h3 className="text-base font-bold mb-2">Sobre o Projeto</h3>
+                    <h3 className="text-base font-bold mt-10 md:mt-0 mb-2">Sobre o Projeto</h3>
                     <p className="mb-2"> Blah BlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlah</p>
                     <p>&copy; {new Date().getFullYear()} Bit&Volt. Direitos Reservados a Mim.</p>
                 </div>
