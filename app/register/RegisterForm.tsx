@@ -94,7 +94,7 @@ const RegisterForm:React.FC<RegisterFormProps> = ({currentUser}) => {
             
             <Input 
             id='password'
-            label="Password"
+            label="Palavra-Passe"
             disabled={isLoading}
             register={register}
             errors={errors}

@@ -78,7 +78,7 @@ const LoginForm:React.FC<LoginFormProps> = ({currentUser}) => {
             
             <Input 
             id='password'
-            label="Password"
+            label="Palavra-Passe"
             disabled={isLoading}
             register={register}
             errors={errors}

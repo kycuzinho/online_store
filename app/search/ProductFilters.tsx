@@ -102,7 +102,7 @@ const ProductFilters = () => {
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="border p-2 w-52 md:w-72"
+          className="border p-2 w-52 md:w-72 rounded-md"
         >
           <option value="">Selecione a categoria</option>
           {categories.map((item) => (
@@ -117,7 +117,7 @@ const ProductFilters = () => {
           placeholder="Preço mínimo"
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
-          className="border p-2 w-52 md:w-72"
+          className="border p-2 w-52 md:w-72 rounded-md"
         />
       
         <input
@@ -125,7 +125,7 @@ const ProductFilters = () => {
           placeholder="Preço máximo"
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
-          className="border p-2 w-52 md:w-72"
+          className="border p-2 w-52 md:w-72 rounded-md"
         />
       
         <button
