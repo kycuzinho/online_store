@@ -15,9 +15,13 @@ export async function PUT(request:Request) {
     const {id, deliveryStatus} = body
 
     const order = await prisma.order.update({
-        where: {id: id },
-        data: {deliveryStatus}
-    })
+        where: { id },
+        data: { deliveryStatus },
+        include: {
+          user: true,
+        },
+      });
+      
 
     return NextResponse.json(order)
 }

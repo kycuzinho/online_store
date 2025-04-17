@@ -11,9 +11,10 @@ const AdminNav = () => {
     const pathname = usePathname();
 
     return ( 
-        <div className="w-full shadow-sm top-20 border-b-[1px] pt-4">
+        <div className=" sticky w-full shadow-sm top-20 pt-4 bg-sky-100">
             <Container>
                 <div className="
+                sticky
                 flex 
                 flex-row
                 items-start 
