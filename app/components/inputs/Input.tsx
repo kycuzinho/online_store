@@ -12,6 +12,11 @@ interface InputProps {
     required?: boolean;
     register: UseFormRegister<FieldValues>
     errors: FieldErrors
+    validation?: object;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onFocus?: () => void;
+  onBlur?: () => void;
+
 }
 
 const Input: React.FC<InputProps> = ({
@@ -22,6 +27,10 @@ const Input: React.FC<InputProps> = ({
     required,
     register,
     errors,
+    validation,
+    onChange,
+    onFocus,
+    onBlur,
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     
@@ -31,9 +40,12 @@ const Input: React.FC<InputProps> = ({
         autoComplete="off"
         id={id}
         disabled={disabled}
-        {...register(id, {required})}
+        {...register(id, { required, ...validation })}
         placeholder=""
         type={type === "password" ? (showPassword ? "text" : "password") : type}
+        onChange={onChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
         className={`
         peer
         w-full

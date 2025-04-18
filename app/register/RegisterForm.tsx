@@ -19,7 +19,11 @@ interface RegisterFormProps{
 }
 
 const RegisterForm:React.FC<RegisterFormProps> = ({currentUser}) => {
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
+    const [passwordValue, setPasswordValue] = useState('');
+    const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+
+
     const {register, handleSubmit, formState: {errors}} = useForm<FieldValues>({
         defaultValues:{
             name: '',
@@ -100,7 +104,38 @@ const RegisterForm:React.FC<RegisterFormProps> = ({currentUser}) => {
             errors={errors}
             required
             type="password"
+            validation={{
+                minLength: {
+                value: 6,
+                message: "A palavra-passe deve ter pelo menos 6 caracteres",
+                },
+                validate: {
+                hasUppercase: (value: string) =>
+                    /[A-Z]/.test(value) || "Deve conter pelo menos uma letra maiúscula",
+                hasNumber: (value: string) =>
+                    /\d/.test(value) || "Deve conter pelo menos um número",
+                },
+            }}
+            onChange={(e) => setPasswordValue(e.target.value)} 
+            onFocus={() => setIsPasswordFocused(true)}
+            onBlur={() => setIsPasswordFocused(false)}
             />
+
+            {isPasswordFocused && (
+            <div className="text-sm space-y-1 mt-2">
+                <p className={passwordValue.length >= 6 ? "text-green-600" : "text-rose-500"}>
+                • Pelo menos 6 caracteres
+                </p>
+                <p className={/[A-Z]/.test(passwordValue) ? "text-green-600" : "text-rose-500"}>
+                • Pelo menos uma letra maiúscula
+                </p>
+                <p className={/\d/.test(passwordValue) ? "text-green-600" : "text-rose-500"}>
+                • Pelo menos um número
+                </p>
+            </div>
+            )}
+
+
 
             <Button 
                 onClick={handleSubmit(onSubmit)}
