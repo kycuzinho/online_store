@@ -27,10 +27,10 @@ const Input: React.FC<InputProps> = ({
     required,
     register,
     errors,
-    validation,
+    /* validation,
     onChange,
     onFocus,
-    onBlur,
+    onBlur, */
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     
@@ -40,12 +40,12 @@ const Input: React.FC<InputProps> = ({
         autoComplete="off"
         id={id}
         disabled={disabled}
-        {...register(id, { required, ...validation })}
+        {...register(id, { required, /* ...validation */ })}
         placeholder=""
         type={type === "password" ? (showPassword ? "text" : "password") : type}
-        onChange={onChange}
+        /* onChange={onChange}
         onFocus={onFocus}
-        onBlur={onBlur}
+        onBlur={onBlur} */
         className={`
         peer
         w-full

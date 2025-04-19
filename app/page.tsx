@@ -5,6 +5,7 @@ import HomeBanner from "./components/HomeBanner";
 import ProductCard from "./components/products/ProductCard";
 import getProducts, { IProductParams } from "@/actions/getProducts";
 import NullData from "./components/NullData";
+import RecentProducts from "./components/products/RecentProducts";
 
 interface HomeProps {
   searchParams: IProductParams
@@ -35,6 +36,9 @@ export default async function Home({searchParams}: HomeProps) {
         <div>
           {/* <HomeBanner/> */}
         </div>
+        {/* <div>
+          <RecentProducts/>
+        </div> */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl-grid-cols-7 2xl :grid-cols-6 gap-8">
           {shuffledProduct.map((product: any) =>{
             return <ProductCard data={product} key={product.id}/>

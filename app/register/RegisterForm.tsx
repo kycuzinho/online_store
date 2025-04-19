@@ -104,7 +104,7 @@ const RegisterForm:React.FC<RegisterFormProps> = ({currentUser}) => {
             errors={errors}
             required
             type="password"
-            validation={{
+            /* validation={{
                 minLength: {
                 value: 6,
                 message: "A palavra-passe deve ter pelo menos 6 caracteres",
@@ -118,10 +118,10 @@ const RegisterForm:React.FC<RegisterFormProps> = ({currentUser}) => {
             }}
             onChange={(e) => setPasswordValue(e.target.value)} 
             onFocus={() => setIsPasswordFocused(true)}
-            onBlur={() => setIsPasswordFocused(false)}
+            onBlur={() => setIsPasswordFocused(false)} */
             />
 
-            {isPasswordFocused && (
+            {/* {isPasswordFocused && (
             <div className="text-sm space-y-1 mt-2">
                 <p className={passwordValue.length >= 6 ? "text-green-600" : "text-rose-500"}>
                 • Pelo menos 6 caracteres
@@ -133,7 +133,7 @@ const RegisterForm:React.FC<RegisterFormProps> = ({currentUser}) => {
                 • Pelo menos um número
                 </p>
             </div>
-            )}
+            )} */}
 
 
 
