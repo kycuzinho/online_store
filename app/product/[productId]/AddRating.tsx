@@ -101,7 +101,7 @@ const AddRating:React.FC<AddRatingProps> = ({product, user}) => {
             required
             />
 
-            <Button label={isLoandig ? 'Loading' : 'Avaliar'} onClick={handleSubmit(onSubmit)}/>
+            <Button label={isLoandig ? 'A adicionar o comentário' : 'Avaliar'} onClick={handleSubmit(onSubmit)}/>
         </div>
      );
 }
