@@ -58,7 +58,7 @@ const LoginForm:React.FC<LoginFormProps> = ({currentUser}) => {
     };
 
     if(currentUser){
-        return <p className="text-center">Já está logado</p>
+        return <p className="text-center">já está com sessão iniciada</p>
     }
 
     return ( 

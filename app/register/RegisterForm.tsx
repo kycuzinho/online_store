@@ -69,7 +69,7 @@ const RegisterForm:React.FC<RegisterFormProps> = ({currentUser}) => {
     };
 
     if(currentUser){
-        return <p className="text-center">Já está logado</p>
+        return <p className="text-center">já está com sessão iniciada</p>
     }
 
     return ( 
