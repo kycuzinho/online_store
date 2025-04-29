@@ -65,7 +65,7 @@ const BarGraph: React.FC<BarGraphProps> = ({ data }) => {
         scales: {
             y: {
                 ticks: {
-                    callback: (value: any) => formatPrice(value) // Convert cents to Euros in Y-axis labels
+                    callback: (value: any) => formatPrice(value) 
                 }
             }
         }
