@@ -11,7 +11,7 @@ const AdminNav = () => {
     const pathname = usePathname();
 
     return ( 
-        <div className=" sticky w-full shadow-sm top-20 pt-4 bg-sky-100 z-50">
+        <div className=" sticky w-full shadow-sm top-20 pt-4 bg-sky-100 z-48">
             <Container>
                 <div className="
                 sticky

@@ -12,15 +12,15 @@ interface BarGraphProps {
 type GraphData = {
     day: string;
     date: string;
-    totalAmount: number; // Value is in cents
+    totalAmount: number; 
 };
 
-// Function to format price from cents to Euros
+
 const formatPrice = (amount: number) => {
     return new Intl.NumberFormat('pt-PT', {
         style: 'currency',
         currency: 'EUR'
-    }).format(amount / 100); // Convert cents to Euros
+    }).format(amount / 100); 
 };
 
 const diasSemana: Record<string, string> = {
@@ -42,7 +42,7 @@ const BarGraph: React.FC<BarGraphProps> = ({ data }) => {
         datasets: [
             {
                 label: "Total de Vendas (Últimos 7 dias)",
-                data: amounts, // Still in cents (Chart.js expects numbers)
+                data: amounts, 
                 backgroundColor: "rgba(75, 192, 192, 0.6)",
                 borderColor: "rgba(75, 192, 192, 1)",
                 borderWidth: 1
@@ -57,7 +57,7 @@ const BarGraph: React.FC<BarGraphProps> = ({ data }) => {
                 callbacks: {
                     label: (context: any) => {
                         let value = context.raw;
-                        return formatPrice(value); // Convert cents to Euros in tooltip
+                        return formatPrice(value); 
                     }
                 }
             }

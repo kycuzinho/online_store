@@ -22,7 +22,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
   return (
     <>
-      <div className="relative group z-30">
+      <div className="relative group z-50">
         <div
           onClick={toggleOpen}
           className="
